@@ -13,13 +13,20 @@ class CreateLibrosTable extends Migration
      */
     public function up()
 {
+    Schema::create('categorias', function (Blueprint $table) {
+        $table->bigIncrements('id');
+        $table->string('nombre');
+        $table->timestamps();
+    }); // como cateogoria aparece en libro tiene que hacerse primero
+
     Schema::create('libros', function (Blueprint $table) {
         $table->bigIncrements('id');
         $table->string('titulo');
         $table->mediumText('descripcion');
         $table->text('contenido');
         $table->timestamp('fecha')->nullable();
-        $table->unsignedInteger('categoria_id'); // Relación con categorias
+        $table->unsignedBigInteger('categoria_id'); // Relación con categorias
+        $table->foreign('categoria_id')->references('id')->on('categorias'); // clave foranea para que se haga relac a nivel de bd
         $table->timestamps();
     });
 }
@@ -32,5 +39,7 @@ class CreateLibrosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('libros');
+        Schema::dropIfExists('categorias');//primero elimino libros
+        //poniendo una migracion aca puedo eliminar el archivo de migración
     }
 }
