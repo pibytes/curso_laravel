@@ -5,6 +5,7 @@ use App\Libro;
 use Carbon\Carbon;
 use App\Categoria;
 use App\Etiqueta;
+use App\User;
 
 class LibrosTableSeeder extends Seeder
 {
@@ -15,19 +16,24 @@ class LibrosTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(User::class, 5)->create();
+
         //Categoria::truncate(); // Evita duplicar datos, los comento por lo de las relaciones
 
-        $categoria = new Categoria();
-        $categoria->nombre = "Categoría 1";
-        $categoria->save();
+        // $categoria = new Categoria();
+        // $categoria->nombre = "Categoría 1";
+        // $categoria->save();
 
-        $categoria = new Categoria();
-        $categoria->nombre = "Categoría 2";
-        $categoria->save();
+        // $categoria = new Categoria();
+        // $categoria->nombre = "Categoría 2";
+        // $categoria->save();
 
-        $categoria = new Categoria();
-        $categoria->nombre = "Categoría 3";
-        $categoria->save();
+        // $categoria = new Categoria();
+        // $categoria->nombre = "Categoría 3";
+        // $categoria->save();
+
+        //comento estas seed porque voy a usar la fabrica
+        factory(Categoria::class, 10)->create();
 
         //Etiqueta::truncate(); // Evita duplicar datos
 
